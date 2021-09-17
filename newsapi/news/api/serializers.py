@@ -1,4 +1,4 @@
-from django.utils.translation import activate
+from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from news.models import Article
 
@@ -30,3 +30,14 @@ class ArticleSerializer(serializers.Serializer):
     instance.active = validated_data.get('active', instance.active)
     instance.save()
     return instance
+  
+  def validate(self, data):
+    """ check that description and title are different """
+    if data["title"] == data["description"]:
+      raise serializers.ValidationError("Title and Description must be different")
+    return data
+  
+  def validate_title(self, value):
+    if len(value) < 60:
+      raise serializers.ValidationError("Title must be 60 characters long")
+    return value
