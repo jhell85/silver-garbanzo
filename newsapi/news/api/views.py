@@ -45,6 +45,8 @@ class ArticleDetailAPIView(APIView):
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+""" function based views """
 # @api_view(["GET", "POST"])
 # def article_list_create_api_view(request):
 
