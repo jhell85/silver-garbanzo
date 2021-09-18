@@ -1,14 +1,22 @@
 from datetime import datetime
+from django.db.models import fields
 from django.utils.timesince import timesince
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from news.models import Article
+from news.models import Article, Journalist
+
+class JournalistSerializer(serializers.ModelSerializer):
+  
+  class Meta:
+    model = Journalist
+    fields = "__all__"
+
 
 class ArticleSerializer(serializers.ModelSerializer):
   """inheriting from the ModelSerializer class has a lot of code with the methods
     so you don't have to write as much"""
   time_since_publication = serializers.SerializerMethodField()
-  # author = JournalistSerializer(read_only=True)
+  author = JournalistSerializer(read_only=True)
   # author = serializers.StringRelatedField()
 
   class Meta:
