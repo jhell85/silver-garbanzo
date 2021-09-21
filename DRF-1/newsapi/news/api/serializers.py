@@ -5,18 +5,11 @@ from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from news.models import Article, Journalist
 
-class JournalistSerializer(serializers.ModelSerializer):
-  
-  class Meta:
-    model = Journalist
-    fields = "__all__"
-
-
 class ArticleSerializer(serializers.ModelSerializer):
   """inheriting from the ModelSerializer class has a lot of code with the methods
     so you don't have to write as much"""
   time_since_publication = serializers.SerializerMethodField()
-  author = JournalistSerializer(read_only=True)
+#   author = JournalistSerializer(read_only=True)
   # author = serializers.StringRelatedField()
 
   class Meta:
@@ -47,6 +40,16 @@ class ArticleSerializer(serializers.ModelSerializer):
           raise serializers.ValidationError("The title has to be at least 30 chars long!")
       return value
 
+class JournalistSerializer(serializers.ModelSerializer):
+    articles = serializers.HyperlinkedRelatedField(many=True,
+                                                    read_only=True,
+                                                    view_name="article-detail"
+    )
+    # articles = ArticleSerializer(read_only = True, many=True)
+
+    class Meta:
+        model = Journalist
+        fields = "__all__"
 
 # class ArticleSerializer(serializers.Serializer):
 """Writing a class using the Serializer class doesn't give you many methods and
