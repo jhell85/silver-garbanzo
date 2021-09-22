@@ -19,3 +19,9 @@ class Review(models.Model):
   rating = models.PositiveIntegerField(validators=[
                                                     MinValueValidator(1),
                                                     MaxValueValidator(5)])
+  ebook = models.ForeignKey(Ebook,
+                              on_delete=models.CASCADE,
+                              related_name="reviews")
+    
+  def __str__(self):
+      return str(self.rating)
