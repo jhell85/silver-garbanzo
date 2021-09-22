@@ -3,14 +3,17 @@ from rest_framework.generics import get_object_or_404
 
 from ebooks.models import Ebook, Review
 from ebooks.api.serializers import EbookSerializer, ReviewSerializer
+from ebooks.api.permissions import isAdminUserOrReadOnly
 
 class EbookListCreateAPIView(generics.ListCreateAPIView):
   queryset = Ebook.objects.all()
   serializer_class = EbookSerializer
+  permission_classes = [isAdminUserOrReadOnly]
 
 class EbookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Ebook.objects.all()
   serializer_class = EbookSerializer
+  permission_classes = [isAdminUserOrReadOnly]
   
   
 class ReviewCreateAPIView(generics.CreateAPIView):
