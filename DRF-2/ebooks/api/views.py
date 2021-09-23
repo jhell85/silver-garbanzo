@@ -1,4 +1,4 @@
-from rest_framework import generics, mixins
+from rest_framework import generics, mixins, permissions
 from rest_framework.generics import get_object_or_404
 
 from ebooks.models import Ebook, Review
@@ -19,11 +19,13 @@ class EbookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 class ReviewCreateAPIView(generics.CreateAPIView):
   queryset = Review.objects.all()
   serializer_class = ReviewSerializer
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def perform_create(self, serializer):
       ebook_pk = self.kwargs.get("ebook_pk")
+      review_author = self.request.user
       ebook = get_object_or_404(Ebook, pk=ebook_pk)
-      serializer.save(ebook=ebook)
+      serializer.save(ebook=ebook, review_author=review_author)
 
 
 class ReviewDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
