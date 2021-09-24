@@ -1,8 +1,8 @@
-# Django Rest Framework (DRF) Examples
+# Django Rest Framework Examples
 
 ## Description
 
-This is a collection of projects built using Django Rest Framework it starts with basic
+This is a collection of projects built using Django Rest Framework (DRF) it starts with basic
 implementation of DRF and adds more and different features to each project.
 
 # _DRF-1_
