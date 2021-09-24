@@ -21,7 +21,7 @@ urlpatterns = [
 ]
 
 
-"""This is so the Development Server can find and server all the media files"""
+"""code bellow: so the Development Server can find and serve all the media files"""
 from django.conf.urls.static import static
 from django.conf import settings
 if settings.DEBUG:
