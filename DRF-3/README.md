@@ -13,3 +13,5 @@ showing example use cases for:
     - make seperate route for a user to update their profile's avatar
   - View's using DRF viewsets (ModelViewSet, GenericViewSet, UpdateAPIView) and mixins (UpdateModelMixin, ListModelMixin, RetrieveModelMixin)
   - create permissions so anyone can Read but only owners of profiles can Edit their status or profiles
+  - create REST URL params for gettin all users status and individual user's status
+  - use DRF filters.SearchFilter to search for users.profile by the city
