@@ -15,3 +15,4 @@ showing example use cases for:
   - create permissions so anyone can Read but only owners of profiles can Edit their status or profiles
   - create REST URL params for gettin all users status and individual user's status
   - use DRF filters.SearchFilter to search for users.profile by the city
+- Write tests for all endpoints using DRF APITestCase class
